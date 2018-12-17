@@ -33,9 +33,9 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
+import {mapMutations} from 'vuex'
 export default {
-    
-    
     data(){
         // 验证规则
         const validateUserName = (rule, value, callback) => {
@@ -79,6 +79,9 @@ export default {
         })
     },
     methods:{
+        ...mapMutations({
+            SET_userName : 'SET_userName'
+        }),
         // 验证
         submitLogin (name) {
             this.$refs[name].validate( (valid) =>{
@@ -92,7 +95,15 @@ export default {
         },
         // 登录
         loginMain(){
-            // this.$router.push('/layout')
+            console.log(1)
+           axios.post('/loginHome').then(res =>{
+               console.log(res)
+               if(res.data.code === 0){
+                   this.SET_userName(res.data.data.userName)
+                   this.$router.push('/layout')
+                   debugger
+               }
+           })
         }
     }
 }

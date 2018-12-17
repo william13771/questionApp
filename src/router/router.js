@@ -7,6 +7,6 @@ export default [
     },
     {
       path: '/layout',
-      component:() => import('../views/layout/Layout.vue')
+      component:() => import('../views/layout/Layouts.vue')
     }
   ]
