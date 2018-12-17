@@ -7,6 +7,20 @@ export default [
     },
     {
       path: '/layout',
-      component:() => import('../views/layout/Layouts.vue')
-    }
+      component:() => import('../views/layout/Layouts.vue'),
+      children:[
+        {
+          	path:'',
+        	  component:() => import('../views/index')
+        },
+        {
+            path:'index',
+            component:() => import('../views/index')
+        },
+        {
+            path:'login',
+            component:Login
+        }
+      ]
+    }	
   ]
