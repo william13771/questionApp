@@ -9,7 +9,7 @@
                     </FormItem>
 
                      <FormItem label="密码" prop="pass">
-                        <Input v-model="formItem.pass" type="password" placeholder="请输入用户名">
+                        <Input v-model="formItem.pass" type="password" placeholder="请输入密码">
                         </Input>
                     </FormItem>
                  

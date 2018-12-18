@@ -6,6 +6,10 @@ export default [
       component: Login
     },
     {
+      path:'/login',
+      redirect:'/'
+    },
+    {
       path: '/layout',
       component:() => import('../views/layout/Layouts.vue'),
       children:[
@@ -18,7 +22,7 @@ export default [
             component:() => import('../views/index')
         },
         {
-            path:'login',
+            path:'/login',
             component:Login
         }
       ]

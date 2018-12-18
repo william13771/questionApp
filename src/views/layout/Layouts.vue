@@ -2,7 +2,10 @@
     <div class="layout-wrapper">
         <Layout class="layout-wrapper-layout">
             <Sider collapsible v-model='isCollapsible'  hide-trigger breakpoint='md'>
-                <SiderMenu :collllapsd='isCollapsible' :menuList='menuList'></SiderMenu>
+                <SiderMenu :collllapsd='isCollapsible' :menuList='menuList'>
+                    <div v-if="!isCollapsible" class="logo_text">问哈哈后台</div>
+                    <div v-else class="logo_text">问</div>
+                </SiderMenu>
             </Sider>
             <Layout>
                 <Header class="layout-header">
@@ -21,6 +24,7 @@
 </template>
 <script>
 import SiderMenu from '../../components/sider-menu'
+import axios from 'axios'
 export default {
     components:{
         SiderMenu
@@ -28,36 +32,11 @@ export default {
     data(){
         return {
             isCollapsible:false,
-            menuList:[
-                {
-                    title:'编程语言',
-                    icon:'ios-paper',
-                    name:"1",
-                    path:'index',
-                    children:[
-                        {
-                            title:'Python',
-                            path:'index',
-                            name:"1-1", 
-                        },
-                        {
-                            title:'Java',
-                            path:'index',
-                            name:"1-2", 
-                        }
-                    ]
-                },
-                {
-                    title:'fatter',
-                    icon:'ios-paper',
-                    name:"2",
-                    path:'login',
-                }
-            ]
+            menuList:[]
         }
     },
     mounted(){
-       
+       this.getMenuList()
     },
     computed:{
         tranClass(){
@@ -70,6 +49,12 @@ export default {
     methods:{
         handleCollapsible(){
             this.isCollapsible = !this.isCollapsible
+        },
+        getMenuList(){
+            axios.get('/getMenuList').then( res =>{
+                console.log(res)
+                this.menuList = res.data.data
+            })
         }
     }
 }
@@ -96,6 +81,14 @@ export default {
         .content-card{
             min-height:  calc(~"100vh - 84px");
         }
+    }
+    .logo_text{
+        height: 64px;
+        color: #fff;
+        text-align: center;
+        line-height: 64px;
+        font-size: 30px;
+        // background: orangered;
     }
     
 }
