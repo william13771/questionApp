@@ -1,29 +1,32 @@
 <template>
-    <div>
+    <div class="siderMenu">
         <slot></slot>
-        <Menu v-if="!collllapsd" theme ="dark" width='auto' active-name="1-1" :open-names="['1']">
-            <template v-for='(item,index) in menuList'>
-                <Submenu v-if="item.children" :key="index" :name='item.name'>
-                     <template slot="title">
-                        <Icon :type="item.icon" />
+        <Menu v-show="!collllapsd" theme="dark" width='auto'>
+            <template v-for="(item,index) in menuList">
+                <Submenu :name="item.name" v-if="item.children">
+                    <template slot="title">
+                        <Icon :type="item.icon" size='20'/>
                         {{item.title}}
                     </template>
-                     <MenuItem v-for="subItem in item.children" :key="`menu_${subItem.name}`" :name='subItem.name' :to='`/layout/${subItem.path}`'>
-                        {{subItem.title}}
-                     </MenuItem>
+                    <MenuItem v-for="(subItem,indexs) in item.children" :name="subItem.name" :to="subItem.path">{{subItem.title}}</MenuItem>
                 </Submenu>
-                <MenuItem  v-else :key="index" :name='item.name' @click.native="gotoPath(item.path)">
-                      <Icon :type="item.icon" />
-                      {{item.title}}
-                </MenuItem>
+                 <MenuItem v-else  :name="item.name" :to="item.path">
+                       <Icon :type="item.icon" size='20' />
+                       {{item.title}}
+                 </MenuItem>
             </template>
         </Menu>
         <template v-if="collllapsd" v-for="item in menuList">
-            <ReDropDown v-if="item.children" :parent='item' :key="`drop_${item.name}`"></ReDropDown>
-            <Tooltip v-else transfer :content="item.title" :key="`drop_${item.name}`" placement="right" @click.native='gotoPath(item.path)'>
-                <a class="drop_menu_a">
-                    <Icon :type="item.icon"  :size="20" color='#fff'/>
+            <Dropdown v-if="item.children" placement='right-start'>
+                <a href="javascript:void(0)">
+                    <Icon :type="item.icon" size='30' color='#fff'/>
                 </a>
+                <DropdownMenu slot="list">
+                    <DropdownItem v-for="subItem in item.children">{{subItem.title}}</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
+            <Tooltip v-else :content="item.title" placement='right'>
+                  <Icon :type="item.icon" size='30' color='#fff'/>
             </Tooltip>
         </template>
     </div>
@@ -57,29 +60,11 @@ export default {
     methods:{
         gotoPath(path){
             console.log(path)
-            this.$router.push('/'+path)
         }
     }
 }
 </script>
 <style lang="less" scoped>
-.top{
-    height: 64px;
-}
-.ivu-menu-item-selected{
-    // background: orangered !important;
-}
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover{
-    //   background: orangered !important;
-}
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu){
-    color: #fff;
-}
-.ivu-tooltip,.drop_menu_a{
-     width: 100%;
-    display: block;
-    text-align: center
-}
-
+@import url('./siderMenu.less');
 </style>
 

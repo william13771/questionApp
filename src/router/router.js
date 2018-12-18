@@ -22,7 +22,7 @@ export default [
             component:() => import('../views/index')
         },
         {
-            path:'/login',
+            path:'login',
             component:Login
         }
       ]
