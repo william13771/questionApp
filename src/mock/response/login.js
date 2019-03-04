@@ -14,55 +14,75 @@ export const getMenuList = (option) => {
         data:[
             {
                 title:'会员管理',
-                icon:'logo-nodejs',
                 name:"1",
-                path:'index',
                 children:[
                     {
-                        title:'文章管理',
-                        path:'/layout/index',
+                        title:'会员列表',
+                        path:'/member/member-list',
                         name:'1-1'
-                    },
-                    {
-                        title:'评论管理',
-                        path:'/layout/login',
-                        name:'1-2'
-                    },
-                    {
-                        title:'举报管理',
-                        path:'/layout/question',
-                        name:'1-3'
                     }
                 ]
             },
             {
-                title:'系统设置',
-                icon:'ios-settings',
-                name:'2'
+                title:'知识管理',
+                name:'2',
+                children:[
+                    {
+                        title:'知识列表',
+                        path:'/knowledge/knowledge-list',
+                        name:'2-1'
+                    }
+                ]
             },
             {
                 title:'项目管理',
-                icon:'logo-angular',
                 name:"3",
-                path:'index',
                 children:[
                     {
-                        title:'文章管理',
-                        path:'index',
+                        title:'项目列表',
+                        path:'/project/project-list',
                         name:'3-1'
-                    },
-                    {
-                        title:'评论管理',
-                        path:'index',
-                        name:'3-2'
-                    },
-                    {
-                        title:'举报管理',
-                        path:'index',
-                        name:'3-3'
                     }
                 ]
             },
+            {
+                title:'专家管理',
+                name:"4",
+                children:[
+                    {
+                        title:'专家列表',
+                        path:'/expert/expert-list',
+                        name:'4-1'
+                    }
+                ]
+            },
+            {
+                title:'问题管理',
+                name:"5",
+                children:[
+                    {
+                        title:'问题列表',
+                        path:'/question/question-list',
+                        name:'5-1'
+                    }
+                ]
+            },
+            {
+                title:'权限管理',
+                name:"6",
+                children:[
+                    {
+                        title:'角色管理',
+                        path:'/permission/user-manager',
+                        name:'6-1'
+                    },
+                    {
+                        title:'账户管理',
+                        path:'/permission/account-manager',
+                        name:'6-2'
+                    }
+                ]
+            }
         ]
     }
     return Mock.mock(template)
